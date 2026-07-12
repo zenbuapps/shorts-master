@@ -24,6 +24,9 @@ description: Use when the user has casually recorded talking-head phone clips (w
 | **磁碟剩餘 ≥5GB**（`df -h`） | render/合成中間檔吃 1-2GB/輪 | 清舊專案 clips_preview/、prenorm、已備份的成品副本；**磁碟滿時連 shell 都可能無法執行** |
 | video-use skill（helpers＋venv） | 順剪工具鏈 | 照 video-use install.md |
 
+**缺工具的處理原則：** 上表工具 agent **直接代裝**（brew/uv/git clone，經用戶權限確認；npx 類零安裝）；只有需要管理員密碼的（Homebrew 本體、Node）給指令請用戶自貼。Linux 註記：apt 版 ffmpeg 通常自帶 libass；中文字型改 Noto Sans TC。
+**零服務底線：** 就算一個第三方服務都沒有，本地免費工具（ffmpeg＋HyperFrames＋faster-whisper）仍可完成**順剪＋變速＋全部字卡＋字幕＋人聲美化**的完整成片——只缺 AI B-roll（Phase 3 跳過）與 BGM（發佈平台曲庫補），約八成價值。開工檢查時明講會啟用哪些降級，不要跑到一半才失敗。
+
 **AI 服務一個都沒有？** → 讀 `references/integrations.md`：三條推薦路線（**Higgsfield** 最省事一站式／**ComfyUI Cloud** 官方託管、workflow 全客製／**OpenRouter** 一把 key 吃生圖＋音樂）與零付費最低可行組合。
 
 ## 七階段管線
@@ -47,7 +50,7 @@ transcribe_batch（Scribe word-level）→ pack_transcripts → 讀逐字稿挑 
 ✅ checkpoint：B-roll 版＋各段插入點說明。
 
 ### Phase 4 字卡動畫（talking-head-recut / HyperFrames）
-時間戳**不重轉錄**，用 `helpers/map_timeline.py` 把 Phase 1 逐字稿映射到變速後時間軸。風格問用戶（editorial 大字報最接近台式精緻 YouTuber）。字卡全部進一支 `build.py`（META 表＋卡 HTML＋GSAP timeline），改卡＝改表重跑。版面：臉永遠不擋；**字幕帶（Phase 5 的位置）預留出來**；同軌時間重疊的卡用 `data-track-index` 分軌。樣式庫見 `references/card-patterns.md`。渲染 `npx hyperframes render`——**輸出無音軌**，之後 mux 回原音。
+時間戳**不重轉錄**，用 `helpers/map_timeline.py` 把 Phase 1 逐字稿映射到變速後時間軸。**先出風格選單讓用戶六選一**（editorial 大字報／variety 綜藝爆字／whiteboard 手寫筆記／minimal 極簡／neon 夜光／terminal 工程師——token 表與預覽圖見 card-patterns.md 與 assets/styles/，沒偏好推薦 editorial）。字卡全部進一支 `build.py`（META 表＋卡 HTML＋GSAP timeline），改卡＝改表重跑。版面：臉永遠不擋；**字幕帶（Phase 5 的位置）預留出來**；同軌時間重疊的卡用 `data-track-index` 分軌。樣式庫見 `references/card-patterns.md`。渲染 `npx hyperframes render`——**輸出無音軌**，之後 mux 回原音。
 ✅ checkpoint：字卡版（先 snapshot 抽查再全渲染）。
 
 ### Phase 5 繁中字幕

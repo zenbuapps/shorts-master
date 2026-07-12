@@ -16,6 +16,19 @@
 | 6️⃣ 聲音 | AI 生成 BGM＋人聲美化鏈（去風切/降噪/EQ/壓縮/響度標準化） |
 | 7️⃣ 交付 | 48kHz 相容性驗收（LINE 可直傳）＋逐格 QC |
 
+## 六套字卡風格
+
+Phase 4 開工時六選一，同一套 15 種卡片結構、六種完全不同的視覺人格：
+
+| | | |
+|:---:|:---:|:---:|
+| ![Editorial](assets/styles/editorial.png) | ![Variety](assets/styles/variety.png) | ![Whiteboard](assets/styles/whiteboard.png) |
+| **Editorial 大字報**<br>精緻 YouTuber、知識創作者 | **Variety 綜藝爆字**<br>搞笑、娛樂、實況精華 | **Whiteboard 手寫筆記**<br>教學型、邊講邊畫人設 |
+| ![Minimal](assets/styles/minimal.png) | ![Neon](assets/styles/neon.png) | ![Terminal](assets/styles/terminal.png) |
+| **Minimal 極簡**<br>質感品牌、生活風格 | **Neon 夜光**<br>3C 科技、潮流、夜生活 | **Terminal 工程師**<br>工程師人設、AI 教學 |
+
+字幕樣式會跟著風格連動（綜藝版更粗更跳、terminal 版等寬綠字…）。
+
 ## 安裝
 
 ```bash

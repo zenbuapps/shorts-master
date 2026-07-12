@@ -1,4 +1,25 @@
-# 字卡樣式庫（editorial 大字報系，1080×1920 直式）
+# 字卡樣式庫（1080×1920 直式）
+
+## 風格系統：骨架與皮膚分離
+
+15 種卡的**結構與動畫語彙（骨架）不變**，換一組 design token（皮膚）＝全新風格。Phase 4 開工先讓用戶從六套選一（沒偏好→推薦 editorial）。預覽圖見 `assets/styles/*.png`。
+
+| 風格 | 卡片質感 | 字型/字重 | 動畫個性 | 字幕連動 |
+|------|---------|----------|---------|---------|
+| **editorial 大字報** | 紙底 #FFFDF6＋4-5px ink 邊＋硬陰影 | PingFang TC 800 | back.out 彈跳＋貼紙旋轉 | 白字黑邊＋黃色關鍵詞（本檔預設） |
+| **variety 綜藝爆字** | 無底卡——漸層大字＋粗白描邊＋外層黑影 | PingFang TC 900、字級 +20% | scale 1.6→1 砸落＋shake、✦ 集中線 | 更粗更大（102級）、描邊加厚、黃色關鍵詞 |
+| **whiteboard 手寫筆記** | 便利貼/紙片＋膠帶＋不規則圓角＋軟陰影 | LXGW WenKai TC（需完整版，缺→PingFang）700 | 手繪 draw-path 底線圈圈、輕擺動 | 米白字＋咖啡描邊、紅筆關鍵詞 |
+| **minimal 極簡** | 白/毛玻璃、無邊或 1.5px 細線、無硬陰影 | PingFang TC 500-600、字距放寬 | fade＋y 12 power2，無彈跳 | 72級白字細邊、天藍關鍵詞 |
+| **neon 夜光** | 深色毛玻璃＋1.5-2px 霓虹描邊＋glow box-shadow | PingFang TC 700-800 | opacity＋glow 呼吸、霓虹閃爍 2 下再亮定 | 白字＋青色 glow 關鍵詞 |
+| **terminal 工程師** | #0D1117 終端機視窗（紅黃綠三點 bar）＋1px #30363D 邊 | Menlo/等寬＋PingFang、`$` prompt | 打字機逐字＋block cursor ▌ | 等寬體、綠色 #3FB950 關鍵詞 |
+
+**Token 色板速查：** variety=漸層黃橙 #FFE14D→#FF7A00／青藍 #6EF3FF→#2F6BFF＋桃紅 chip；whiteboard=紙 #FBF7EE、墨 #2B2B2B、紅筆 #D6453D；minimal=單一強調色 #0A84FF（可換品牌色）；neon=青 #00FFF0＋洋紅 #FF3DF2 on rgba(8,10,20,.55)；terminal=#E6EDF3/#3FB950/#D29922/#79C0FF。
+
+**實作方式：** 沿用本檔 Pattern 1-8 的結構與 GSAP 時間軸，僅替換 :root token＋卡片 chrome CSS＋進場 ease（variety 用 back.out(2.6)+shake、minimal 用 power2.out、terminal 用 stagger 打字）。預覽圖生成器 `assets/styles/build_previews.py` 內含六套的完整 CSS 配方可直接抄。
+
+---
+
+以下為 **editorial** 的完整配方（其他風格照上表換皮）：
 
 全部沉澱自實戰。共用 token（定義在 composition :root）：
 
